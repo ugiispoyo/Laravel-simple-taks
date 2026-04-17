@@ -44,19 +44,7 @@ Route::get('/', function () {
     return Inertia::render('Login');
 });
 
-Route::post('/login', function (Request $request) {
-    if (
-        $request->email === 'admin@test.com' &&
-        $request->password === '123456'
-    ) {
-        session(['login' => true]);
-        return redirect('/tasks');
-    }
-
-    return back()->withErrors([
-        'message' => 'Invalid credentials'
-    ]);
-});
+Route::post('/login', [AuthController::class, 'login']);
 
 Route::middleware('simpleauth')->group(function () {
     Route::get('/tasks', [TaskController::class, 'index']);

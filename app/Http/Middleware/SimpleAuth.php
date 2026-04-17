@@ -20,7 +20,7 @@ class SimpleAuth
 
     public function handle($request, Closure $next)
     {
-        if (!session('login')) {
+        if (!session('token')) {
             return redirect('/');
         }
 
